@@ -2,10 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import MobileNav from './MobileNav'
+import { UserButton } from '@clerk/nextjs'
 // import { SignedIn, UserButton } from '@clerk/nextjs'
 const Navbar = () => {
   return (
-    <nav className='flex flex-between fixed z-50 w-full bg-dark-1 px-6 py-4 lg:px-10 mt-0' >
+    <nav className='flex   justify-between items-center fixed z-50 w-full top-0 left-0 bg-dark-1 px-6 py-4 lg:px-10' >
         <Link
         href='/'
          className='flex items-center gap-1'
@@ -19,15 +20,19 @@ const Navbar = () => {
           />
          <p className='text-[26px] font-extrabold text-white max-sm:hidden'>Zoom</p>
         </Link>
-        <div className=" flex flex-between">
-          {/* Clerk */}
-          {/* <SignedIn>
-            <UserButton />
-          </SignedIn> */}
+        <div className=' fixed right-0 p-3'>
+        <UserButton />
+        </div>
+         
+        
+        <div className=" block sm:block md:block lg:hidden mr-8">
+          
           <MobileNav />
         </div>
+       
     </nav>
   )
 }
 
 export default Navbar
+//       // flex-between gap-5 " mobile nav

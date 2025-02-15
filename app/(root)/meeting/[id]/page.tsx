@@ -6,7 +6,7 @@ const Meeting = () => {
     console.log(params);
    
   return (
-    <div>Meeting Room: {
+    <div className='bg-white h-screen'>Meeting Room: {
       params.id || "No slug provided"
       }
       </div>

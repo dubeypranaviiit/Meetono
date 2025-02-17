@@ -9,12 +9,14 @@ import { useGetCallById } from '@/hooks/useGetCallById';
 import { Spinner } from '@/components/Spinner';
 const Meeting = () => {
     const params = useParams()
-    const id = params.id;
+    const id = typeof params.id === "string" ? params.id : params.id?.[0] ?? "";
     console.log(id);
     console.log(params.id);
     const {isLoaded} = useUser();
     const [isSetupComplete,setIsSetupComplete]=useState(false);
-    const {call,isCallLoading} = useGetCallById(id);
+    if (!id) return <Spinner />;
+    // const {call,isCallLoading} = useGetCallById(id);
+    const { call, isCallLoading } = useGetCallById(id ?? ""); 
     if(!isLoaded || isCallLoading) return <Spinner />
   return (
    <main className='h-screen w-full bg-white'>

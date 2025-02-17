@@ -1,6 +1,6 @@
 "use client"
 import { tokenProvider } from "@/action/stream.action";
-import { Spinner } from "@/components/Spinner";
+// import { Spinner } from "@/components/Spinner";
 import { useUser } from "@clerk/nextjs";
 import {
     StreamVideo,
@@ -36,7 +36,8 @@ const client = new StreamVideoClient({
     });
     setVideoClient(client)
     },[user,isLoaded])
-    if(!videoClient) return <Spinner />
+    if(!videoClient) return null;
+    // <Spinner />
     return (
       <StreamVideo client={videoClient}>
         {

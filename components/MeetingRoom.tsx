@@ -18,7 +18,8 @@ import React, { useState } from 'react'
 // import { UserButton } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 // import { Spinner } from './Spinner';
- type CallLayoutType= 'grid' | 'speaker-left ' | 'speaker-right'
+type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
+
  const data =['grid' , 'speaker-left ' , 'speaker-right']
  import EndCallButton from './EndCallButton';
  import { CallingState } from '@stream-io/video-react-sdk';
@@ -26,7 +27,7 @@ const MeetingRoom = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
-  const [layout,setLayout] = useState<CallLayoutType>('speaker-left');
+  const [layout, setLayout] = useState<CallLayoutType>('speaker-left');
   const [showParticipant,setShowParticipant] =useState(false)
   const CallLayout = ()=>{
          switch (layout) {

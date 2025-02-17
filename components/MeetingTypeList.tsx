@@ -1,4 +1,6 @@
 "use client"
+import { Button } from "./ui/button"
+import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import Image from 'next/image'
@@ -18,14 +20,16 @@ const MeetingTypeList = () => {
 const [values,setValues] = useState({
   dateTime:new Date(),
   description:'',
-  link:''
+  link:'',
+  joinCode:'',
 })
 const router = useRouter();
   const {user} = useUser();
   const client = useStreamVideoClient();
   // const [callDetails,setCallDetails]= useState<Call>( )
   const [callDetails, setCallDetails] = useState<Call | null>(null);
-  const { toast } = useToast()
+  const { toast } = useToast();
+
 const createMeeting =async()=>{
   if (!client) {
     console.log("Stream Video Client is not initialized");
@@ -36,11 +40,7 @@ const createMeeting =async()=>{
     
    }
    try{
-          // if(!values.dateTime){
-          //   toast({
-          //     title: "please select a date and time",
-          //   })
-          // }
+  
        const id = crypto.randomUUID();
        const call = client.call('default',id);
        if(!call) throw new Error('Failed to create call')
@@ -71,6 +71,9 @@ const createMeeting =async()=>{
 }
 if (!client || !user) return <Spinner />;
 const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+
+// const meetingLink2 = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingCode}`;
+
   return (
    <section className='grid  grid-cols-1 gap-5 mg:grid-cols-2 xl:grid-cols-4 w-full'>
           <HomeCard 
@@ -91,16 +94,23 @@ const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.
           img="/icons/recordings.svg"
           title="View Recordings"
           description="Check out your recordings"
-           handleClick={() => router.push('/recordings')}
+           handleClick={() => router.push('/recording')}
            className="bg-purple-600"
           />
             <HomeCard 
           img="/icons/join-meeting.svg"
           title="Join Meeting"
           description="via invitation link"
-          handleClick={() => router.push('/meet')}
+          handleClick={() => setMeetingState('isJoiningMeeting')}
           className="bg-yellow-500" 
           />
+            {/* <HomeCard       future implementation
+          img="/icons/join-meeting.svg"
+          title="Join Meeting"
+          description="via invitation Code"
+          handleClick={() => setMeetingState('isJoiningMeeting')}
+          className="bg-blue-400" 
+          /> */}
 
 {!callDetails ? (
         <MeetingModal
@@ -152,8 +162,6 @@ const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.
         />
       )}
 
-
-
 <MeetingModal
         isOpen={meetingState === 'isJoiningMeeting'}
         onClose={() => setMeetingState(undefined)}
@@ -163,13 +171,28 @@ const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.
         handleClick={() => router.push(values.link)}
       >
         
-        <input
+        <Input
           placeholder="Meeting link"
           onChange={(e) => setValues({ ...values, link: e.target.value })}
-          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="border-none bg-dark-2 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
       </MeetingModal>
-
+     
+     {/* future impolementation */}
+      {/* <MeetingModal
+        isOpen={meetingState === 'isJoiningViaCode'}
+        onClose={() => setMeetingState(undefined)}
+        title="Enter the Meeting Code"
+        className="text-center"
+        buttonText="Join with Code"
+        handleClick={() => router.push(`/meeting/${values.joinCode}`)} // Navigate to the code-based meeting
+      >
+        <Input
+          placeholder="Enter code"
+          onChange={(e) => setValues({ ...values, joinCode: e.target.value })}
+          className="border-none bg-dark-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+      </MeetingModal> */}
           <MeetingModal 
            isOpen ={meetingState==='isInstantMeeting'}
            onClose={()=>setMeetingState(undefined)}

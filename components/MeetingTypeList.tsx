@@ -1,9 +1,9 @@
 "use client"
-import { Button } from "./ui/button"
+// import { Button } from "./ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
-import Image from 'next/image'
+// import Image from 'next/image'
 import React, { useState } from 'react'
 import HomeCard from './HomeCard'
 import { useRouter } from 'next/navigation'

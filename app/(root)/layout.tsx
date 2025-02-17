@@ -1,5 +1,5 @@
 import StreamVideoProvider from '@/providers/StreamClientProvider'
-import { StreamTheme } from '@stream-io/video-react-sdk'
+// import { StreamTheme } from '@stream-io/video-react-sdk'
 import React,{ReactNode} from 'react'
 // import '@stream-io/video-react-sdk/style.css';
 

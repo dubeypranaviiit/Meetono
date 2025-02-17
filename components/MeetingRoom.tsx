@@ -1,7 +1,7 @@
 "use client"
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
-import { useParams } from 'next/navigation';
+// import { useParams } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { useCallStateHooks } from '@stream-io/video-react-sdk';
 // import { UseSearchParams } from '@stream-io/video-react-sdk/dist/src/components/Search/hooks';
@@ -15,7 +15,7 @@ import {
 import {LayoutList, Users} from "lucide-react"
 import { CallControls, CallParticipantsList, CallStatsButton, PaginatedGridLayout, SpeakerLayout } from '@stream-io/video-react-sdk';
 import React, { useState } from 'react'
-import { UserButton } from '@clerk/nextjs';
+// import { UserButton } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Spinner } from './Spinner';
  type CallLayoutType= 'grid' | 'speaker-left ' | 'speaker-right'

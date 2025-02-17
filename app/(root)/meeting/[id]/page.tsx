@@ -12,7 +12,7 @@ const Meeting = () => {
     const id = params.id;
     console.log(id);
     console.log(params.id);
-    const {user,isLoaded} = useUser();
+    const {isLoaded} = useUser();
     const [isSetupComplete,setIsSetupComplete]=useState(false);
     const {call,isCallLoading} = useGetCallById(id);
     if(!isLoaded || isCallLoading) return <Spinner />

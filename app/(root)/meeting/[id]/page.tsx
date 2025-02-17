@@ -6,7 +6,7 @@ import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 import MeetingSetup from '@/components/MeetingSetup';
 import MeetingRoom from '@/components/MeetingRoom';
 import { useGetCallById } from '@/hooks/useGetCallById';
-import { Spinner } from '@/components/Spinner';
+// import { Spinner } from '@/components/Spinner';
 const Meeting = () => {
     const params = useParams()
     const id = typeof params.id === "string" ? params.id : params.id?.[0] ?? "";
@@ -17,7 +17,7 @@ const Meeting = () => {
    
     // const {call,isCallLoading} = useGetCallById(id);
     const { call, isCallLoading } = useGetCallById(id ?? ""); 
-    if(!id || !isLoaded || isCallLoading) return 
+    if(!id || !isLoaded || isCallLoading) return  null;
   return (
    <main className='h-screen w-full bg-white'>
         <StreamCall call={call}>

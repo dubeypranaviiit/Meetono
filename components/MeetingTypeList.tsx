@@ -119,6 +119,7 @@ const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.
           onClose={() => setMeetingState(undefined)}
           title="Create Meeting"
           handleClick={createMeeting}
+          buttonText="Schedule Meeting" 
         >
           <div className="flex flex-col gap-2.5">
             <label className="text-base font-normal leading-[22.4px] text-sky-2">

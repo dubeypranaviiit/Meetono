@@ -17,7 +17,7 @@ const Meeting = () => {
    
     // const {call,isCallLoading} = useGetCallById(id);
     const { call, isCallLoading } = useGetCallById(id ?? ""); 
-    if(!id || !isLoaded || isCallLoading) return <Spinner />
+    if(!id || !isLoaded || isCallLoading) return 
   return (
    <main className='h-screen w-full bg-white'>
         <StreamCall call={call}>

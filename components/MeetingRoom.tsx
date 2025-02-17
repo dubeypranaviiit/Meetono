@@ -17,7 +17,7 @@ import { CallControls, CallParticipantsList, CallStatsButton, PaginatedGridLayou
 import React, { useState } from 'react'
 // import { UserButton } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import { Spinner } from './Spinner';
+// import { Spinner } from './Spinner';
  type CallLayoutType= 'grid' | 'speaker-left ' | 'speaker-right'
  const data =['grid' , 'speaker-left ' , 'speaker-right']
  import EndCallButton from './EndCallButton';
@@ -45,7 +45,8 @@ const MeetingRoom = () => {
   }
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
-  if (callingState !== CallingState.JOINED) return <Spinner />;
+  // if (callingState !== CallingState.JOINED) return <Spinner />;
+    if (callingState !== CallingState.JOINED) return null;
   return (
    <section className='relative h-screen w-full overflow-hidden pt-4 text-white'>
                 <div className=' relative flex size-full items-center justify-center '>

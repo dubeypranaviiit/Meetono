@@ -4,7 +4,7 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import MeetingCard from './MeetingCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Spinner } from './Spinner';
+// import { Spinner } from './Spinner';
 import { useToast } from '@/hooks/use-toast';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
@@ -55,7 +55,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         toast({
           title: 'Error',
           description: 'Please try again later.',
-          status: 'error', // Can use success, error, info, or warning
+           // Can use success, error, info, or warning
         });
         console.log(error);
       }
@@ -66,8 +66,8 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     }
   }, [type, callRecordings, toast]);
 
-  if (isLoading) return <Spinner />;
-
+  // if (isLoading) return <Spinner />;
+  if (isLoading) return null;
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
 

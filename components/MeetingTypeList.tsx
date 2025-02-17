@@ -69,7 +69,8 @@ const createMeeting =async()=>{
     })
   }
 }
-if (!client || !user) return <Spinner />;
+// if (!client || !user) return <Spinner />;
+if (!client || !user) return null;
 const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
 // const meetingLink2 = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingCode}`;

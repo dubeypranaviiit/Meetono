@@ -5,11 +5,13 @@ import MeetingCard from './MeetingCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Spinner } from './Spinner';
+import { useToast } from '@/hooks/use-toast';
+
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
-  const { endedCalls, upcomingCalls, callRecordings, isLoading } =
-    useGetCalls();
+  const { endedCalls, upcomingCalls, callRecordings, isLoading } = useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
+  const { toast } = useToast();  // To display notifications
 
   const getCalls = () => {
     switch (type) {
@@ -39,21 +41,30 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
 
   useEffect(() => {
     const fetchRecordings = async () => {
-      const callData = await Promise.all(
-        callRecordings?.map((meeting) => meeting.queryRecordings()) ?? [],
-      );
+      try {
+        const callData = await Promise.all(
+          callRecordings?.map((meeting) => meeting.queryRecordings()) ?? [],
+        );
 
-      const recordings = callData
-        .filter((call) => call.recordings.length > 0)
-        .flatMap((call) => call.recordings);
+        const recordings = callData
+          .filter((call) => call.recordings.length > 0)
+          .flatMap((call) => call.recordings);
 
-      setRecordings(recordings);
+        setRecordings(recordings);
+      } catch (error) {
+        toast({
+          title: 'Error',
+          description: 'Please try again later.',
+          status: 'error', // Can use success, error, info, or warning
+        });
+        console.log(error);
+      }
     };
 
     if (type === 'recordings') {
       fetchRecordings();
     }
-  }, [type, callRecordings]);
+  }, [type, callRecordings, toast]);
 
   if (isLoading) return <Spinner />;
 
@@ -65,13 +76,13 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
           <MeetingCard
-            key={(meeting as Call).id}
+            key={(meeting as Call).id || (meeting as CallRecording).filename}  // Improved key handling
             icon={
               type === 'ended'
                 ? '/icons/previous.svg'
                 : type === 'upcoming'
-                  ? '/icons/upcoming.svg'
-                  : '/icons/recordings.svg'
+                ? '/icons/upcoming.svg'
+                : '/icons/recordings.svg'
             }
             title={
               (meeting as Call).state?.custom?.description ||

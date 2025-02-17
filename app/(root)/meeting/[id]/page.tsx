@@ -14,10 +14,10 @@ const Meeting = () => {
     console.log(params.id);
     const {isLoaded} = useUser();
     const [isSetupComplete,setIsSetupComplete]=useState(false);
-    if (!id) return <Spinner />;
+   
     // const {call,isCallLoading} = useGetCallById(id);
     const { call, isCallLoading } = useGetCallById(id ?? ""); 
-    if(!isLoaded || isCallLoading) return <Spinner />
+    if(!id || !isLoaded || isCallLoading) return <Spinner />
   return (
    <main className='h-screen w-full bg-white'>
         <StreamCall call={call}>

@@ -4,8 +4,8 @@ import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useRouter } from "next/navigation";
 import { useGetCallById } from "@/hooks/useGetCallById";
 import { Button } from "@/components/ui/button";
-// import { useToast } from "@/components/ui/use-toast";
 import { useToast } from "@/hooks/use-toast";
+import { SocialShare } from '@/components/SocialShare'
 const Table = ({
   title,
   description,
@@ -61,7 +61,7 @@ const PersonalRoom = () => {
         <Table title="Meeting ID" description={meetingId!} />
         <Table title="Invite Link" description={meetingLink} />
       </div>
-      <div className="flex gap-5">
+      {/* <div className="flex gap-5">
         <Button className="bg-blue-1" onClick={startRoom}>
           Start Meeting
         </Button>
@@ -76,6 +76,29 @@ const PersonalRoom = () => {
         >
           Copy Invitation
         </Button>
+       
+      </div> */}
+        <div className="flex flex-col gap-5">
+        <div className="flex gap-5">
+          <Button className="bg-blue-1" onClick={startRoom}>
+            Start Meeting
+          </Button>
+          <Button
+            className="bg-dark-3"
+            onClick={() => {
+              navigator.clipboard.writeText(meetingLink)
+              toast({
+                title: 'Link Copied',
+              })
+            }}
+          >
+            Copy Invitation
+          </Button>
+           {/* Social Share Component */}
+        <SocialShare url={meetingLink} />
+        </div>
+
+       
       </div>
     </section>
   );

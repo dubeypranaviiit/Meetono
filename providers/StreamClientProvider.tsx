@@ -1,6 +1,6 @@
 "use client"
 import { tokenProvider } from "@/action/stream.action";
-// import { Spinner } from "@/components/Spinner";
+
 import { useUser } from "@clerk/nextjs";
 import {
     StreamVideo,
@@ -18,7 +18,7 @@ import { ReactNode, useEffect, useState } from "react";
 if(!isLoaded || !user){
 return;
 }
-console.log(`Api key${apiKey}`);
+
 if(!apiKey){
 throw new Error('Stream ApI key Missing')
 }
@@ -37,7 +37,7 @@ const client = new StreamVideoClient({
     setVideoClient(client)
     },[user,isLoaded])
     if(!videoClient) return null;
-    // <Spinner />
+ 
     return (
       <StreamVideo client={videoClient}>
         {

@@ -2,7 +2,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils';
 import Image from 'next/image'
-// import MeetingData from "./meetingData"
+
 interface HomeCardProps{
   className:string,
   img:string,
@@ -15,7 +15,7 @@ const HomeCard = ({className,img,title,description,handleClick}:HomeCardProps) =
     <div className={cn(" bg-orange-1 px-3 py-3 flex flex-col justify-between w-full xl:max-[3500px] min-h-[300px] rounded-[14px] cursor-pointer",className)}
     onClick={handleClick}
     >
-         {/* <div className='flex sm:flex-col md:flex-row'> */}
+      
          <div className='flex-center glassmorphism size-12 rounded-[10px]'>
             <Image src={img} alt="meeting" width={27} height={27} />
           </div>

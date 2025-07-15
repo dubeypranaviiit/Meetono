@@ -12,13 +12,13 @@ const Navbar = () => {
          className='flex items-center gap-1'
         >
          <Image
-          src="/icons/logo.svg"
+          src="/icons/meetono1.png"
           alt="logo-image"
           width={32}
           height={32}
           className='max-sm:size-10'
           />
-         <p className='text-[26px] font-extrabold text-white max-sm:hidden'>Zoom</p>
+         <p className='text-[26px] font-extrabold text-white max-sm:hidden'>Meetono</p>
         </Link>
         <div className=' fixed right-0 p-3'>
         <UserButton />
@@ -35,4 +35,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-//       // flex-between gap-5 " mobile nav

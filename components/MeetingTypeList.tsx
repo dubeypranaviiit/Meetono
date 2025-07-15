@@ -1,9 +1,7 @@
 "use client"
-// import { Button } from "./ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
-// import Image from 'next/image'
 import React, { useState } from 'react'
 import HomeCard from './HomeCard'
 import { useRouter } from 'next/navigation'
@@ -11,7 +9,6 @@ import MeetingModal from "./MeetingModal"
 import { useUser } from '@clerk/nextjs'
 import { useStreamVideoClient } from '@stream-io/video-react-sdk'
 import { Call } from '@stream-io/video-react-sdk'
-// import { Spinner } from "./Spinner"
 import DatePicker  from "react-datepicker";
 const MeetingTypeList = () => {
   const [meetingState, setMeetingState] = useState<
@@ -26,7 +23,7 @@ const [values,setValues] = useState({
 const router = useRouter();
   const {user} = useUser();
   const client = useStreamVideoClient();
-  // const [callDetails,setCallDetails]= useState<Call>( )
+  
   const [callDetails, setCallDetails] = useState<Call | null>(null);
   const { toast } = useToast();
 
@@ -56,7 +53,7 @@ const createMeeting =async()=>{
     })
     setCallDetails(call);
     if(!values.description){
-      console.log(`call id :${call.id}`);
+    
       router.push(`/meeting/${call.id}`)
     }
     toast({

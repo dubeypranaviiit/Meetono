@@ -13,9 +13,8 @@ export const tokenProvider =async()=>{
     if(!apiSecret)  throw new Error('No Api Secret');
 
 const  client =new StreamClient(apiKey,apiSecret)
-//  const exp = Math.round(new Date().getTime() /1000  ) + 60*60; system automatically handle this
-//  const token = client.generateUserToken({ user_id: user.id,  validity_in_seconds: 3600 }); //jmastery
-const iat = Math.floor(Date.now() / 1000) - 10; // Subtract 10 seconds to avoid future timestamp issues
+
+const iat = Math.floor(Date.now() / 1000) - 10; 
 const token = client.generateUserToken({ user_id: user.id, iat, validity_in_seconds: 3600 });
  console.log(`TOken ${token}`);
  return token;

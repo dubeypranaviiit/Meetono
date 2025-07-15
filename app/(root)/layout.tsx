@@ -1,7 +1,11 @@
 import StreamVideoProvider from '@/providers/StreamClientProvider'
-// import { StreamTheme } from '@stream-io/video-react-sdk'
+
 import React,{ReactNode} from 'react'
-// import '@stream-io/video-react-sdk/style.css';
+export const metadata: Metadata = {
+  title: 'Meetono',
+  description: 'A workspace for your team, powered by Stream Chat and Clerk.',
+};
+
 
 const Rootlayout = ({children}:{children:ReactNode}) => {
   return (

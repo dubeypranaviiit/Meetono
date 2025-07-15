@@ -14,6 +14,7 @@
 // ];
 
 // export default eslintConfig;
+// eslint.config.js
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -25,14 +26,13 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
+export default [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   {
+    name: "custom-rules",
     rules: {
-      "@typescript-eslint/no-explicit-any": "off", // ✅ disable the rule globally
+      "@typescript-eslint/no-explicit-any": "off", // ✅ DISABLE RULE HERE
     },
   },
 ];
-
-export default eslintConfig;

@@ -1,42 +1,41 @@
-import stream from 'getstream';
+import stream from 'getstream'
 
 export type Meeting = {
-  meeting_title: string;
-  meeting_time: string;
-  meeting_date: string;
-};
+  meeting_title: string
+  meeting_time: string
+  meeting_date: string
+}
+
+type StreamActivity = {
+  object: Meeting
+}
 
 export const getUpcomingMeeting = async (userId: string): Promise<Meeting | null> => {
   const client = stream.connect(
     process.env.STREAM_API_KEY!,
     process.env.STREAM_API_SECRET!,
     process.env.STREAM_APP_ID!
-  );
+  )
 
-  const feed = client.feed('user', userId);
+  const feed = client.feed('user', userId)
 
-  const { results } = await feed.get({ limit: 15 });
+  const { results } = await feed.get()
 
-  const now = new Date();
+  const activities = results as StreamActivity[]
+  const now = new Date()
 
-  const futureMeetings = results
+  const futureMeetings = activities
     .filter((activity) => {
-      const meeting = activity?.object as Partial<Meeting>;
-      return meeting.meeting_date && new Date(meeting.meeting_date) > now;
+      const date = activity.object?.meeting_date
+      return date && new Date(date) > now
     })
-    .sort((a, b) => {
-      const aDate = new Date((a?.object as Partial<Meeting>).meeting_date || '');
-      const bDate = new Date((b?.object as Partial<Meeting>).meeting_date || '');
-      return aDate.getTime() - bDate.getTime();
-    });
+    .sort((a, b) =>
+      new Date(a.object.meeting_date).getTime() - new Date(b.object.meeting_date).getTime()
+    )
 
-  if (futureMeetings.length === 0) return null;
+  if (futureMeetings.length > 0) {
+    return futureMeetings[0].object
+  }
 
-  const first = futureMeetings[0].object as Meeting;
-
-  return {
-    meeting_title: first.meeting_title,
-    meeting_time: first.meeting_time,
-    meeting_date: first.meeting_date,
-  };
-};
+  return null
+}

@@ -119,8 +119,12 @@ const MeetingPage = () => {
         const callInstance = client.call('default', id as string)
         await callInstance.join()
         setCall(callInstance)
-      } catch (err) {
-        console.error('❌ Failed to join call:', err)
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error('❌ Failed to join call:', err.message)
+        } else {
+          console.error('❌ Failed to join call:', err)
+        }
       }
     }
 

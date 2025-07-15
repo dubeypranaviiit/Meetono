@@ -14,7 +14,7 @@
 // ];
 
 // export default eslintConfig;
-// eslint.config.js
+// eslint.config.mjs
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -27,12 +27,14 @@ const compat = new FlatCompat({
 });
 
 export default [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended"),
 
+  // ✅ Disable 'no-explicit-any' globally for all TypeScript files
   {
-    name: "custom-rules",
+    files: ["**/*.ts", "**/*.tsx"],
     rules: {
-      "@typescript-eslint/no-explicit-any": "off", // ✅ DISABLE RULE HERE
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];
+
